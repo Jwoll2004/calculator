@@ -11,30 +11,41 @@ function mult(a, b) {
 }
 
 function div(a, b) {
-    if (b === 0) {
-        return 'ERROR';
-    }
-    return a / b;
+    return (a / b);
 }
 
 function operate(a, op, b) {
+    let ans = 0;
     switch (op) {
         case '+':
-            add(a, b);
+            ans = add(a, b);
             break;
         case '-':
-            sub(a, b);
+            ans = sub(a, b);
             break;
         case '*':
-            sub(a, b);
+            ans = mult(a, b);
             break;
         case '/':
-            div(a, b);
+            if (b === 0) {
+                return 'ERROR';
+            }
+            ans = div(a, b);
+            ans = ans.toFixed(2);
             break;
         default:
             break;
     }
+    return ans;
 }
+
+function isOprtr(op) {
+    return op === '+' || op === '-' || op === '*' || op === '/';
+}
+function isNum(num) {
+    return num >= 0 && num <= 9;
+}
+
 function genleft() {
     const left = document.querySelector('.left');
     for (let i = 0; i < 3; ++i) {
@@ -83,26 +94,63 @@ genright();
 let num1;
 let num2;
 let optr;
-let input;
+let input = '0'; document.querySelector('.display').textContent = input;
+let evaluation = '';
 
+let numberOfOperators = 0;
 const btn = document.querySelectorAll('button');
 btn.forEach((button) => {
     button.addEventListener('click', () => {
         if (button.textContent === 'Clear') {
-            input = '';
+            input = '0';
+            evaluation = '';
+            num1 = 0;
+            num2 = 0;
+            optr = '';
+            numberOfOperators = 0;
             document.querySelector('.display').textContent = input;
-            return;
         }
         if (button.textContent === '=') {
-            num2 = parseInt(input);
-            input = operate(num1, optr, num2);
+            num2 = parseInt(evaluation);
+
+            // check for errors
+            if(num1 === NaN || num1 === undefined || num2 === NaN || num2 === undefined || optr === undefined || optr === '') {
+                
+            }
+            else{
+                input = operate(num1, optr, num2);
+            }
             document.querySelector('.display').textContent = input;
-            return;
         }
-        if (input === undefined) {
-            input = '';
+
+        if(isNum(parseInt(button.textContent))){
+            if(input === '0') {
+                input = '';
+            }
+            evaluation += button.textContent;
         }
-        input += button.textContent;
+        
+        if(isOprtr(button.textContent)) {
+            if (numberOfOperators === 1) {
+                num2 = parseInt(evaluation);
+                num1 = operate(parseInt(num1), optr, parseInt(num2));
+                optr = button.textContent;
+                numberOfOperators = 0;
+                evaluation = `${num1}`;
+                input = `${num1}`;
+            }
+            if (numberOfOperators === 0) {
+                num1 = parseInt(evaluation);
+                evaluation = '';
+                optr = button.textContent;
+                numberOfOperators++;
+            }
+        }
+        
+        if(button.textContent !== '=' && button.textContent !== 'Clear') {
+            input += button.textContent;
+        }
         document.querySelector('.display').textContent = input;
+        //console.log("input = ", input, "eval = ", evaluation, "num1 = ", num1, "num2 = ", num2, "optr = ", optr, "numOptr = ", numberOfOperators);
     });
 });
