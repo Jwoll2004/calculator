@@ -58,8 +58,10 @@ function gentop(){
     const del = document.createElement('button');
     clr.textContent = 'Clear';
     clr.style = 'padding: 30px 48px; margin: 5px; font-size: 25px; ';
+    clr.id = 'Clear';
     del.textContent = 'Delete';
     del.style = 'padding: 30px 48px; margin: 5px; font-size: 25px; ';
+    del.id = 'Delete';
     toprow.appendChild(clr);
     toprow.appendChild(del);
     top.appendChild(toprow);
@@ -72,6 +74,7 @@ function genleft() {
         for (let j = 3*i + 1; j <= 3*(i+1); ++j) {
             const btn = document.createElement('button');
             btn.textContent = `${j}`;
+            btn.id = `${j}`;
 
             btn.style = 'padding: 30px; margin: 5px; font-size: 25px;'
             row.appendChild(btn);
@@ -81,8 +84,11 @@ function genleft() {
 
     const row = document.createElement('div');
     const zero = document.createElement('button');
+    zero.id = '0';
     const point = document.createElement('button');
+    point.id = '.';
     const equal = document.createElement('button');
+    equal.id = '='; 
     zero.textContent = '0';
     zero.style = 'padding: 30px; margin: 5px; font-size: 25px;';
     point.textContent = '.';
@@ -102,11 +108,31 @@ function genright() {
         const btn = document.createElement('button');
         btn.textContent = `${optr[i]}`;
         btn.style = 'padding: 30px; margin: 5px; font-size: 25px;';
+        btn.id = `${optr[i]}`;
         right.appendChild(btn);
     }
 
 }
 
+function keyboardInput(e) {
+    console.log(e.key, "pressed");
+    if(e.key === 'Enter') {
+        document.getElementById('=').click();
+    }
+    if(e.key === 'Backspace') {
+        document.getElementById('Delete').click();
+    }
+    if(e.key === 'Escape') {
+        document.getElementById('Clear').click();
+    }
+    if(e.key === 'shift') {
+        return;
+    }
+    if(isNum(parseFloat(e.key)) || e.key === '.' || isOprtr(e.key)) {
+        document.getElementById(e.key).click();
+    }
+    
+}
 gentop();
 genleft();
 genright();
@@ -119,6 +145,7 @@ let input = '0'; document.querySelector('.display').textContent = input;
 let numberOfOperators = 0;
 
 const btn = document.querySelectorAll('button');
+window.addEventListener('keydown', keyboardInput);
 
 btn.forEach((button) => {
     button.addEventListener('click', () => {
