@@ -56,11 +56,12 @@ function gentop(){
     const toprow = document.createElement('div');
     const clr = document.createElement('button');
     const del = document.createElement('button');
+    top.style = 'display: flex; justify-content: center; ';
     clr.textContent = 'Clear';
-    clr.style = 'padding: 30px 48px; margin: 5px; font-size: 25px; ';
+    clr.style = 'padding: 30px 48px; margin-right: 5px; margin-bottom: 5px; font-size: 25px; background-color: #FFC4C4;';
     clr.id = 'Clear';
     del.textContent = 'Delete';
-    del.style = 'padding: 30px 48px; margin: 5px; font-size: 25px; ';
+    del.style = 'padding: 30px 48px; margin-left: 5px ; margin-bottom: 5px; font-size: 25px; background-color: #C5C1FB;';
     del.id = 'Delete';
     toprow.appendChild(clr);
     toprow.appendChild(del);
@@ -76,7 +77,7 @@ function genleft() {
             btn.textContent = `${j}`;
             btn.id = `${j}`;
 
-            btn.style = 'padding: 30px; margin: 5px; font-size: 25px;'
+            btn.style = 'padding: 30px; margin: 5px; font-size: 25px; background-color:  #FFF7AD;'
             row.appendChild(btn);
         }
         left.appendChild(row);
@@ -90,11 +91,11 @@ function genleft() {
     const equal = document.createElement('button');
     equal.id = '='; 
     zero.textContent = '0';
-    zero.style = 'padding: 30px; margin: 5px; font-size: 25px;';
+    zero.style = 'padding: 30px; margin: 5px; font-size: 25px; background-color:  #FFF7AD;';
     point.textContent = '.';
-    point.style = 'padding: 30px 33.6px; margin: 5px; font-size: 25px;';
+    point.style = 'padding: 30px 33.6px; margin: 5px; font-size: 25px; background-color:  #FFF7AD;';
     equal.textContent = '=';
-    equal.style = 'padding: 30px; margin: 5px; font-size: 25px; ';
+    equal.style = 'padding: 30px; margin: 5px; font-size: 25px; background-color:  #FFF7AD;';
     row.appendChild(zero);
     row.appendChild(point);
     row.appendChild(equal);
@@ -107,7 +108,7 @@ function genright() {
     for (let i = 0; i < 4; ++i) {
         const btn = document.createElement('button');
         btn.textContent = `${optr[i]}`;
-        btn.style = 'padding: 30px; margin: 5px; font-size: 25px;';
+        btn.style = 'padding: 30px; margin: 5px; font-size: 25px; background-color: #C3FFB2;';
         btn.id = `${optr[i]}`;
         right.appendChild(btn);
     }
