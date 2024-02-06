@@ -138,10 +138,10 @@ gentop();
 genleft();
 genright();
 
-let num1;
-let num2;
+let num1 = 0;
+let num2 = 0;
 let optr;
-let evaluation = '';
+let evaluation = '0';
 let input = '0'; document.querySelector('.display').textContent = input;
 let numberOfOperators = 0;
 
@@ -152,7 +152,7 @@ btn.forEach((button) => {
     button.addEventListener('click', () => {
         if (button.textContent === 'Clear') {
             input = '0';
-            evaluation = '';
+            evaluation = '0';
             num1 = 0;
             num2 = 0;
             optr = '';
